@@ -1,45 +1,34 @@
 import IStudentRepository from "../../domain/repositories/IStudentRepository";
+import StudentTable from "../sequelize/StudentTable";
 import Student from "../../domain/entities/Student";
 
+
 export default class SequelizeStudentRepository implements IStudentRepository {
-    // protected prisma: PrismaClient;
-
-    constructor() {
-        // this.prisma = new PrismaClient();
+    async findByRegistration(registration: number): Promise<Student | null> {
+      return await StudentTable.findByPk(registration);
     }
-
-    async findByRegistration(registration: number): Promise<Student> {
-        return await this.prisma.student.findUnique({
-            where: { registration }
-        });
+  
+    async findByEmail(email: string): Promise<Student | null> {
+      return await StudentTable.findOne({ where: { email } });
     }
-
-    async findByEmail(email: string): Promise<Student> {
-        return await this.prisma.student.findUnique({
-            where: { email },
-        })
-    }
-
+  
     async create(student: Student): Promise<void> {
-        await this.prisma.student.create({
-            data: student,
-        })
+        const { registration, ...studentData } = student;
+        
+      await StudentTable.create(studentData);
     }
-
+  
     async delete(registration: number): Promise<void> {
-        await this.prisma.student.delete({
-            where: { registration },
-        })
+      await StudentTable.destroy({ where: { registration } });
     }
-
+  
     async update(student: Student): Promise<void> {
-        await this.prisma.student.update({
-            where: { registration: student.registration },
-            data: student,
-        })
+      await StudentTable.update(student, { where: { registration: student.registration } });
     }
-
+  
     async list(): Promise<Student[]> {
-        return await this.prisma.student.findMany();
+      const students = await StudentTable.findAll();
+      console.log(students)
+      return students
     }
-}
+  }

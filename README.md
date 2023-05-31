@@ -20,8 +20,16 @@
 ## **Alguns comandos pro desenvolvimento**
 
 ```bash
-npx prisma migrate dev --schema ./src/infra/prisma/schema.prisma
-npx prisma generate --schema ./src/infra/prisma/schema.prisma
+$ npm i
+$ npx sequelize-cli init
+$ nano example.env
+$ nano config/config.json
+$ npx sequelize-cli db:migrate
+```
+
+Caso precise, crie a sua migrate com o comando:
+```bash
+$ npx sequelize-cli migration:generate --name <name-of-migrate>
 ```
 
 ## **Tasks**

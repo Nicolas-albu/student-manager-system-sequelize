@@ -1,15 +1,15 @@
 import DeleteStudentUseCase from "../../domain/useCases/DeleteStudentUseCase";
 import CreateStudentUseCase from "../../domain/useCases/CreateStudentUseCase";
-import ListStudentsUseCase from "../../domain/useCases/ListStudentsUseCase";
 import IStudentRepository from "../../domain/repositories/IStudentRepository";
+import ListStudentsUseCase from "../../domain/useCases/ListStudentsUseCase";
 
 import CreateStudentController from "../controllers/CreateStudentController";
 import DeleteStudentController from "../controllers/DeleteStudentController";
 import ListStudentsController from "../controllers/ListStudentsController";
 
-import repositoryFactory from "../../infra/repositories/RepositoryFactory";
 import UpdateStudentUseCase from "../../domain/useCases/UpdateStudentUseCase";
 import UpdateStudentController from "../controllers/UpdateStudentController";
+import repositoryFactory from "../../infra/repositories/RepositoryFactory";
 import GetStudentsUserCase from "../../domain/useCases/GetStudentUseCase";
 import GetStudentController from "../controllers/GetStudentController";
 
