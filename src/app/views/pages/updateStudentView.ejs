@@ -12,7 +12,12 @@
       </div>
       <div class="form-group">
         <label>Data de nascimento:</label>
-        <input type="date" name="dateOfBirth" value="<%= student.dateOfBirth %>" required>
+        <input 
+        type="date" 
+        name="dateOfBirth"
+        min="1940-01-01"
+        max="2023-12-31" 
+        value="<%= student.dateOfBirth %>" required>
       </div>
       <div class="form-group">
         <label>Email:</label>

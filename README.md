@@ -24,10 +24,21 @@ $ npm i
 $ npx sequelize-cli init
 $ nano example.env
 $ nano config/config.json
+$ npx sequelize-cli db:create
 $ npx sequelize-cli db:migrate
 ```
 
+Ou pode utilizar o Makefile, se estiver com GNU Make instalado na sua máquina, com os seguintes
+comandos na raiz do projeto:
+
+```bash
+$ make 1-config
+$ make 2-config
+$ make run
+```
+
 Caso precise, crie a sua migrate com o comando:
+
 ```bash
 $ npx sequelize-cli migration:generate --name <name-of-migrate>
 ```

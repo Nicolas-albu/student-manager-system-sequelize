@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "build-css": "tailwindcss -i ./src/app/views/static/main.css -o ./src/app/views/static/style.css --watch",
     "server:dev": "tsx watch src/server.ts"
   },
   "keywords": [],

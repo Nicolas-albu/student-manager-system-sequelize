@@ -2,7 +2,7 @@ import ListStudentsUserCase from "../../domain/useCases/ListStudentsUseCase";
 import Student from "../../domain/entities/Student";
 import { Request, Response } from 'express'
 
-export default class CreateStudentController {
+export default class ListStudentController {
     constructor(
         private listStudentsUseCase: ListStudentsUserCase,
     ) { }
@@ -13,12 +13,15 @@ export default class CreateStudentController {
         try {
             students = await this.listStudentsUseCase.execute()
 
-            const dateOfStudentsFormatted = students.map((student) => ({
-                ...student,
+            students = students.map((student) => ({
+                registration: student.registration,
+                name: student.name,
                 dateOfBirth: student.dateOfBirth.toLocaleString().slice(0, 10),
-            }));            
-            
-            return dateOfStudentsFormatted
+                email: student.email,
+                status: student.status,
+            }));
+
+            return students
         } catch (err) {
             const errorMessage = err.message || 'Ocorreu um erro na listagem dos estudantes'
 

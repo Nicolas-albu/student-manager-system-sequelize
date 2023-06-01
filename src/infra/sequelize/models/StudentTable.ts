@@ -1,20 +1,11 @@
-import { sequelizeConnection } from './database';
+import { StudentAttributes } from '../../../domain/entities/Student';
 import { Model, DataTypes } from 'sequelize';
+import sequelize from '../sequelize';
 
-enum Status {
-    ATIVO = 'ATIVO',
-    INATIVO = 'INATIVO',
-}
 
-export default class StudentTable extends Model {
-    public registration: number;
-    public name: string;
-    public dateOfBirth: Date;
-    public email: string;
-    public status: Status;
-}
+interface StudentModel extends StudentAttributes, Model<StudentAttributes> { }
 
-StudentTable.init({
+const StudentTable = sequelize.define<StudentModel>('TBL_STUDENT', {
     registration: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -24,6 +15,7 @@ StudentTable.init({
     name: {
         type: DataTypes.STRING,
         allowNull: false,
+
     },
     dateOfBirth: {
         type: DataTypes.DATE,
@@ -35,12 +27,10 @@ StudentTable.init({
         unique: true,
     },
     status: {
-        type: DataTypes.ENUM(...Object.values(Status)),
+        type: DataTypes.STRING,
         allowNull: false,
-    },
-},
-    {
-        tableName: 'TBL_STUDENT',
-        sequelize: sequelizeConnection,
+        defaultValue: 'ATIVO',
     }
-);
+})
+
+export default StudentTable
