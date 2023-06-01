@@ -2,6 +2,7 @@ import IStudentRepository from "../../domain/repositories/IStudentRepository";
 import StudentTable from "../sequelize/models/StudentTable";
 import Student from "../../domain/entities/Student";
 import sequelize from "../sequelize/sequelize";
+import { Op } from "sequelize";
 
 
 export default class SequelizeStudentRepository implements IStudentRepository {
@@ -9,6 +10,18 @@ export default class SequelizeStudentRepository implements IStudentRepository {
     await sequelize.sync();
 
     return await StudentTable.findByPk(registration);
+  }
+
+  async findByName(name: string): Promise<Student[]> {
+    await sequelize.sync();
+
+    return await StudentTable.findAll({
+      where: {
+        name: {
+          [Op.like]: `${name}%`
+        }
+      }
+    })
   }
 
   async findByEmail(email: string): Promise<Student | null> {

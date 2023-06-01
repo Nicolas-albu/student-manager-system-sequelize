@@ -1,0 +1,52 @@
+<%- include('../public/styleCreateUpdate') %>
+<script>
+    const searchStudent = async (input) => {
+        const nameStudent = input.value;
+
+        const response = await fetch(window.location.href + 'search/' + nameStudent)
+        const data = await response.json()
+
+        console.log(data)
+
+        for (let student of data) {
+            const divStudent = document.createElement('div')
+
+            const { registration, name, dateOfBirth, email, status } = student;
+            
+            for (let attribute = 0; attribute < Object.keys(student).length; attribute++) {
+                const pName = document.createElement('p')
+                pRegistration.textContent = student.registration
+                pName.textContent = student.name
+    
+                divStudent.appendChild(pRegistration)
+            }
+
+            divStudent.appendChild(pName)
+
+            document.body.appendChild(divStudent)
+
+            // for (let attribute of student) {
+            //     const paragraph = document.createElement('p')
+            //     paragraph.textContent = attribute
+
+            //     divStudent.appendChild(paragraph)
+            //     document.body.appendChild(divStudent)
+            // }
+
+            console.log(student);
+        }
+    }
+</script>
+
+<div class="container">
+    <div class="form-group">
+        <form action="">
+            <input 
+            type="text" 
+            name="name"
+            id="input-name" 
+            placeholder="Pesquisar aluno por nome"
+            oninput="searchStudent(this)">
+        </form>
+    </div>
+</div>

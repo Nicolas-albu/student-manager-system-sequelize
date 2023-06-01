@@ -16,4 +16,8 @@ useCasesRouter.delete('/delete/:registration', (req, res) => {
     return studentUserCases.deleteStudentController.handle(req, res);
 })
 
+useCasesRouter.get('/search/:name', (req, res) => {
+    return studentUserCases.getStudentsByNameController.handle(req, res);
+})
+
 export default useCasesRouter
